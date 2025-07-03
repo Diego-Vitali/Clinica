@@ -7,7 +7,7 @@ public class Usuario {
 	private int id;
     private String email;
     private String senhaHash;
-    private String tipoUsuario; // Mapeia ENUM('PACIENTE', 'MEDICO', 'RECEPCIONISTA', 'ADMIN')
+    private String tipoUsuario; // ENUM: PACIENTE, MEDICO, RECEPCIONISTA, ADMIN
     private boolean ativo;
     private LocalDateTime dataCriacao;
 

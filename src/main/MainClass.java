@@ -4,9 +4,8 @@ import view.LoginScreen;
 
 public class MainClass {
 
-    @SuppressWarnings("unused")
     public static void main(String[] args) {
-
+    	
         LoginScreen loginScreen = new LoginScreen();
         loginScreen.setVisible(true);
     }

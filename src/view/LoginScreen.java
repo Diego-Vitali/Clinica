@@ -1,4 +1,5 @@
 package view;
+import main.MainClass;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -88,17 +89,15 @@ public class LoginScreen extends JFrame {
         gbcForm.weightx = 0;
         formPanel.add(passwordLabel, gbcForm);
 
-        // Campo Senha
-        passwordField = new JPasswordField(20); // Tamanho preferencial inicial
+        passwordField = new JPasswordField(20); 
         passwordField.setFont(fieldFont);
         gbcForm.gridx = 1;
         gbcForm.gridy = 1;
-        gbcForm.anchor = GridBagConstraints.WEST; // Alinhar à esquerda
-        gbcForm.fill = GridBagConstraints.HORIZONTAL; // Preencher horizontalmente
-        gbcForm.weightx = 1.0; // Consumir espaço extra horizontal
+        gbcForm.anchor = GridBagConstraints.WEST; 
+        gbcForm.fill = GridBagConstraints.HORIZONTAL; 
+        gbcForm.weightx = 1.0; 
         formPanel.add(passwordField, gbcForm);
 
-        // Botão Entrar
         loginButton = new JButton("Entrar");
         loginButton.setFont(new Font("Arial", Font.BOLD, 18));
         loginButton.setBackground(new Color(70, 130, 180));
@@ -130,12 +129,6 @@ public class LoginScreen extends JFrame {
         // Adiciona o painel principal ao frame
         add(mainPanel);
     }
-
-    /**
-     * Tenta realizar o login com as credenciais fornecidas.
-     * Por enquanto, é uma validação simples. Em um sistema real,
-     * você faria a verificação no banco de dados.
-     */
     private void attemptLogin() {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword()); // Converte a senha para String

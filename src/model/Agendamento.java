@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Agendamento {
@@ -9,17 +10,17 @@ public class Agendamento {
     private int medicoId;
     private int procedimentoId;
     private int salaId;
-    private LocalDateTime dataHoraInicio;
-    private LocalDateTime dataHoraFim;
+    private Timestamp dataHoraInicio;
+    private Timestamp dataHoraFim;
     private String status; // Mapeia ENUM
     private String observacoes;
     private int criadoPorUsuarioId;
-    private LocalDateTime dataCriacao;
+    private Timestamp dataCriacao;
 
     public Agendamento() {
     }
 
-    public Agendamento(int id, int pacienteId, int medicoId, int procedimentoId, int salaId, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String status, String observacoes, int criadoPorUsuarioId, LocalDateTime dataCriacao) {
+    public Agendamento(int id, int pacienteId, int medicoId, int procedimentoId, int salaId, Timestamp dataHoraInicio, Timestamp dataHoraFim, String status, String observacoes, int criadoPorUsuarioId, Timestamp dataCriacao) {
         this.id = id;
         this.pacienteId = pacienteId;
         this.medicoId = medicoId;
@@ -54,11 +55,11 @@ public class Agendamento {
         return salaId;
     }
 
-    public LocalDateTime getDataHoraInicio() {
+    public Timestamp getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public LocalDateTime getDataHoraFim() {
+    public Timestamp getDataHoraFim() {
         return dataHoraFim;
     }
 
@@ -74,7 +75,7 @@ public class Agendamento {
         return criadoPorUsuarioId;
     }
 
-    public LocalDateTime getDataCriacao() {
+    public Timestamp getDataCriacao() {
         return dataCriacao;
     }
 
@@ -99,11 +100,11 @@ public class Agendamento {
         this.salaId = salaId;
     }
 
-    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
+    public void setDataHoraInicio(Timestamp dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public void setDataHoraFim(LocalDateTime dataHoraFim) {
+    public void setDataHoraFim(Timestamp dataHoraFim) {
         this.dataHoraFim = dataHoraFim;
     }
 
@@ -119,7 +120,7 @@ public class Agendamento {
         this.criadoPorUsuarioId = criadoPorUsuarioId;
     }
 
-    public void setDataCriacao(LocalDateTime dataCriacao) {
+    public void setDataCriacao(Timestamp dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 }
