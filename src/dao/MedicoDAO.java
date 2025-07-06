@@ -1,50 +1,46 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import model.Medico;
+
+import java.sql.*;
 
 public class MedicoDAO {
-    
-    public boolean inserir(Medico entidade) {
+
+    public int inserirRetornandoId(Medico medico) {
         String sql = "INSERT INTO tb_medicos (funcionario_id, crm) VALUES (?, ?)";
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, entidade.getFuncionario_id());
-            pstmt.setString(2, entidade.getCrm());
-            return pstmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.err.println("Erro ao inserir em tb_medicos:");
-            e.printStackTrace();
-            return false;
-        }
-    }
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-    public boolean atualizar(Medico entidade) {
-        String sql = "UPDATE tb_medicos SET funcionario_id = ?, crm = ? WHERE id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, entidade.getFuncionario_id());
-            pstmt.setString(2, entidade.getCrm());
-            pstmt.setInt(3, entidade.getId());
-            return pstmt.executeUpdate() > 0;
+            pstmt.setInt(1, medico.getFuncionarioId());
+            pstmt.setString(2, medico.getCrm());
+
+            int rows = pstmt.executeUpdate();
+            if (rows > 0) {
+                ResultSet rs = pstmt.getGeneratedKeys();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
         } catch (SQLException e) {
-            System.err.println("Erro ao atualizar em tb_medicos:");
+            System.err.println("Erro ao inserir médico:");
             e.printStackTrace();
-            return false;
         }
+
+        return -1;
     }
 
     public boolean deletar(int id) {
         String sql = "DELETE FROM tb_medicos WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setInt(1, id);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Erro ao deletar de tb_medicos:");
+            System.err.println("Erro ao deletar médico:");
             e.printStackTrace();
-            return false;
         }
+
+        return false;
     }
 }

@@ -3,9 +3,8 @@ package model;
 import java.time.LocalDate;
 
 public class Paciente {
-	
-	private int id;
-    private Integer usuarioId; // Pode ser nulo
+    private int id;
+    private int usuarioId;
     private String nomeCompleto;
     private String cpf;
     private LocalDate dataNascimento;
@@ -14,92 +13,31 @@ public class Paciente {
     private String convenio;
     private String numeroCarteirinha;
 
-    public Paciente() {
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public Paciente(int id, Integer usuarioId, String nomeCompleto, String cpf, LocalDate dataNascimento, String telefone, String endereco, String convenio, String numeroCarteirinha) {
-        this.id = id;
-        this.usuarioId = usuarioId;
-        this.nomeCompleto = nomeCompleto;
-        this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
-        this.telefone = telefone;
-        this.endereco = endereco;
-        this.convenio = convenio;
-        this.numeroCarteirinha = numeroCarteirinha;
-    }
+    public int getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(int usuarioId) { this.usuarioId = usuarioId; }
 
-    // Getters
-    public int getId() {
-        return id;
-    }
+    public String getNomeCompleto() { return nomeCompleto; }
+    public void setNomeCompleto(String nomeCompleto) { this.nomeCompleto = nomeCompleto; }
 
-    public Integer getUsuarioId() {
-        return usuarioId;
-    }
+    public String getCpf() { return cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
+    public LocalDate getDataNascimento() { return dataNascimento; }
+    public void setDataNascimento(LocalDate dataNascimento) { this.dataNascimento = dataNascimento; }
 
-    public String getCpf() {
-        return cpf;
-    }
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
+    public String getEndereco() { return endereco; }
+    public void setEndereco(String endereco) { this.endereco = endereco; }
 
-    public String getTelefone() {
-        return telefone;
-    }
+    public String getConvenio() { return convenio; }
+    public void setConvenio(String convenio) { this.convenio = convenio; }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public String getConvenio() {
-        return convenio;
-    }
-
-    public String getNumeroCarteirinha() {
-        return numeroCarteirinha;
-    }
-
-    // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setUsuarioId(Integer usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public void setConvenio(String convenio) {
-        this.convenio = convenio;
-    }
-
-    public void setNumeroCarteirinha(String numeroCarteirinha) {
-        this.numeroCarteirinha = numeroCarteirinha;
-    }
+    public String getNumeroCarteirinha() { return numeroCarteirinha; }
+    public void setNumeroCarteirinha(String numeroCarteirinha) { this.numeroCarteirinha = numeroCarteirinha; }
 }

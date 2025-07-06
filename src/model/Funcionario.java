@@ -3,8 +3,7 @@ package model;
 import java.time.LocalDate;
 
 public class Funcionario {
-	
-	private int id;
+    private int id;
     private int usuarioId;
     private String nomeCompleto;
     private String cpf;
@@ -13,83 +12,28 @@ public class Funcionario {
     private LocalDate dataAdmissao;
     private boolean ativo;
 
-    public Funcionario() {
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public Funcionario(int id, int usuarioId, String nomeCompleto, String cpf, String cargo, String telefone, LocalDate dataAdmissao, boolean ativo) {
-        this.id = id;
-        this.usuarioId = usuarioId;
-        this.nomeCompleto = nomeCompleto;
-        this.cpf = cpf;
-        this.cargo = cargo;
-        this.telefone = telefone;
-        this.dataAdmissao = dataAdmissao;
-        this.ativo = ativo;
-    }
+    public int getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(int usuarioId) { this.usuarioId = usuarioId; }
 
-    // Getters
-    public int getId() {
-        return id;
-    }
+    public String getNomeCompleto() { return nomeCompleto; }
+    public void setNomeCompleto(String nomeCompleto) { this.nomeCompleto = nomeCompleto; }
 
-    public int getUsuarioId() {
-        return usuarioId;
-    }
+    public String getCpf() { return cpf; }
+    public void setCpf(String cpf) { this.cpf = cpf; }
 
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
+    public String getCargo() { return cargo; }
+    public void setCargo(String cargo) { this.cargo = cargo; }
 
-    public String getCpf() {
-        return cpf;
-    }
+    public String getTelefone() { return telefone; }
+    public void setTelefone(String telefone) { this.telefone = telefone; }
 
-    public String getCargo() {
-        return cargo;
-    }
+    public LocalDate getDataAdmissao() { return dataAdmissao; }
+    public void setDataAdmissao(LocalDate dataAdmissao) { this.dataAdmissao = dataAdmissao; }
 
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public LocalDate getDataAdmissao() {
-        return dataAdmissao;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public void setDataAdmissao(LocalDate dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
+    public boolean isAtivo() { return ativo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
 }

@@ -1,161 +1,118 @@
 package view;
+
+import controller.Controller;
 import main.MainClass;
+import model.Usuario;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginScreen extends JFrame {
 
-    /**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
-	private JTextField usernameField;
-    private JPasswordField passwordField;
+    private static final long serialVersionUID = 1L;
+    private JTextField campoUsuario;
+    private JPasswordField campoSenha;
     private JButton loginButton;
+    private JButton registerButton;
 
     public LoginScreen() {
         setTitle("Login - Clínica Médica");
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Tela cheia
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Criar um painel principal com GridBagLayout para centralizar o formulário
         JPanel mainPanel = new JPanel(new GridBagLayout());
-        // Ajuste o espaçamento externo para centralizar o formPanel visualmente
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(300, 500, 300, 500));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(200, 400, 200, 400));
 
-        GridBagConstraints gbcMainPanel = new GridBagConstraints();
-        gbcMainPanel.fill = GridBagConstraints.BOTH; // Permitir que o formPanel preencha o espaço
-        gbcMainPanel.weightx = 1.0; // Permitir que o formPanel se expanda horizontalmente
-        gbcMainPanel.weighty = 1.0; // Permitir que o formPanel se expanda verticalmente
+        JPanel formPanel = createFormPanel();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        mainPanel.add(formPanel, gbc);
 
+        add(mainPanel);
+    }
 
-        // Painel para o formulário de login, agora usando GridBagLayout para flexibilidade
-        JPanel formPanel = new JPanel(new GridBagLayout()); // Mudado para GridBagLayout
-        formPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createEtchedBorder(), // Borda com efeito
-                "Credenciais de Acesso",
-                TitledBorder.CENTER, // Título centralizado
-                TitledBorder.TOP,
-                new Font("Arial", Font.BOLD, 16) // Fonte maior para o título da borda
-        ));
-        // --- Reduzir o EmptyBorder do formPanel para um tamanho mediano ---
-        formPanel.setBorder(BorderFactory.createCompoundBorder(
-            formPanel.getBorder(), // Mantém a borda original
-            BorderFactory.createEmptyBorder(15, 25, 15, 25) // Valores ajustados para um tamanho mediano
-        ));
+    private JPanel createFormPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createTitledBorder("Credenciais de Acesso"));
 
-        // Fontes para os rótulos e campos
-        Font labelFont = new Font("Arial", Font.PLAIN, 16);
-        Font fieldFont = new Font("Arial", Font.PLAIN, 16);
+        Font font = new Font("Arial", Font.PLAIN, 16);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
 
-        // GridBagConstraints para os componentes dentro do formPanel
-        GridBagConstraints gbcForm = new GridBagConstraints();
-        gbcForm.insets = new Insets(8, 8, 8, 8); // Espaçamento entre os elementos do formulário
+        JLabel userLabel = new JLabel("E-mail:");
+        userLabel.setFont(font);
+        campoUsuario = new JTextField(20);
+        campoUsuario.setFont(font);
 
-        // --- Adicionar componentes ao formPanel usando GridBagLayout ---
-
-        // Rótulo Usuário
-        JLabel usernameLabel = new JLabel("Usuário:");
-        usernameLabel.setFont(labelFont);
-        gbcForm.gridx = 0;
-        gbcForm.gridy = 0;
-        gbcForm.anchor = GridBagConstraints.WEST; // Alinhar à esquerda
-        gbcForm.fill = GridBagConstraints.NONE; // Não preencher o espaço horizontal
-        gbcForm.weightx = 0; // Não consumir espaço extra
-        formPanel.add(usernameLabel, gbcForm);
-
-        // Campo Usuário
-        usernameField = new JTextField(20); // Tamanho preferencial inicial
-        usernameField.setFont(fieldFont);
-        gbcForm.gridx = 1;
-        gbcForm.gridy = 0;
-        gbcForm.anchor = GridBagConstraints.WEST; // Alinhar à esquerda
-        gbcForm.fill = GridBagConstraints.HORIZONTAL; // Preencher horizontalmente
-        gbcForm.weightx = 1.0; // Consumir espaço extra horizontal
-        formPanel.add(usernameField, gbcForm);
-
-        // Rótulo Senha
-        JLabel passwordLabel = new JLabel("Senha:");
-        passwordLabel.setFont(labelFont);
-        gbcForm.gridx = 0;
-        gbcForm.gridy = 1;
-        gbcForm.anchor = GridBagConstraints.WEST; // Alinhar à esquerda
-        gbcForm.fill = GridBagConstraints.NONE;
-        gbcForm.weightx = 0;
-        formPanel.add(passwordLabel, gbcForm);
-
-        passwordField = new JPasswordField(20); 
-        passwordField.setFont(fieldFont);
-        gbcForm.gridx = 1;
-        gbcForm.gridy = 1;
-        gbcForm.anchor = GridBagConstraints.WEST; 
-        gbcForm.fill = GridBagConstraints.HORIZONTAL; 
-        gbcForm.weightx = 1.0; 
-        formPanel.add(passwordField, gbcForm);
+        JLabel passLabel = new JLabel("Senha:");
+        passLabel.setFont(font);
+        campoSenha = new JPasswordField(20);
+        campoSenha.setFont(font);
 
         loginButton = new JButton("Entrar");
         loginButton.setFont(new Font("Arial", Font.BOLD, 18));
         loginButton.setBackground(new Color(70, 130, 180));
         loginButton.setForeground(Color.WHITE);
         loginButton.setFocusPainted(false);
-        gbcForm.gridx = 0;
-        gbcForm.gridy = 2;
-        gbcForm.gridwidth = 2; // Ocupar 2 colunas
-        gbcForm.anchor = GridBagConstraints.CENTER; // Centralizar o botão
-        gbcForm.fill = GridBagConstraints.NONE; // Não preencher o espaço (o botão mantém o tamanho)
-        gbcForm.weightx = 0; // Não consumir espaço extra para o botão
-        formPanel.add(loginButton, gbcForm);
+        loginButton.addActionListener(e -> attemptLogin());
 
 
-        // Adiciona o painel do formulário ao centro do painel principal usando GridBagLayout
-        gbcMainPanel.gridx = 0;
-        gbcMainPanel.gridy = 0;
-        gbcMainPanel.anchor = GridBagConstraints.CENTER; // Centraliza o formPanel no espaço total
-        mainPanel.add(formPanel, gbcMainPanel); // Usa gbcMainPanel para o formPanel
-
-        // Adiciona um listener para o botão de login
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                attemptLogin();
-            }
+        JLabel registerLabel = new JLabel("Novo Paciente?");
+        registerLabel.setFont(font);
+        registerButton = new JButton("Cadastre-se");
+        registerButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        registerButton.addActionListener(e -> {
+            dispose(); 
+            SwingUtilities.invokeLater(() -> new CadastroUsuario().setVisible(true));
         });
 
-        // Adiciona o painel principal ao frame
-        add(mainPanel);
-    }
-    private void attemptLogin() {
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword()); // Converte a senha para String
+        addToPanel(panel, userLabel, gbc, 0, 0);
+        addToPanel(panel, campoUsuario, gbc, 1, 0);
+        addToPanel(panel, passLabel, gbc, 0, 1);
+        addToPanel(panel, campoSenha, gbc, 1, 1);
 
-        // Exemplo de validação simples (apenas para demonstração)
-        if (username.equals("admin") && password.equals("123")) {
-            JOptionPane.showMessageDialog(this, "Login bem-sucedido!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            // Se o login for bem-sucedido, você fecharia a tela de login
-            // e abriria a tela principal do sistema.
-            dispose(); // Fecha a tela de login
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    MainClass.createMainScreen(); // Chama a tela principal da MainClass
-                }
-            });
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(loginButton, gbc);
+
+        gbc.gridy = 3;
+        panel.add(registerButton, gbc);
+
+        return panel;
+    }
+
+    private void addToPanel(JPanel panel, Component comp, GridBagConstraints gbc, int x, int y) {
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = (comp instanceof JTextField || comp instanceof JPasswordField)
+                ? GridBagConstraints.HORIZONTAL
+                : GridBagConstraints.NONE;
+        gbc.weightx = (comp instanceof JTextField || comp instanceof JPasswordField) ? 1.0 : 0;
+        panel.add(comp, gbc);
+    }
+
+    private void attemptLogin() {
+        String email = campoUsuario.getText();
+        String senha = new String(campoSenha.getPassword());
+
+        Usuario usuario = Controller.logar(email, senha);
+        if (usuario != null) {
+            JOptionPane.showMessageDialog(this, "Login bem-sucedido!");
+            dispose();
+            SwingUtilities.invokeLater(() -> MainClass.createMainScreen());
         } else {
-            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
-            passwordField.setText(""); // Limpa o campo de senha
+            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            campoSenha.setText("");
         }
     }
 
-    // Método main para testar a tela de login individualmente (opcional)
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new LoginScreen().setVisible(true);
-            }
-        });
+        SwingUtilities.invokeLater(() -> new LoginScreen().setVisible(true));
     }
 }

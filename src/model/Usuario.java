@@ -6,18 +6,17 @@ public class Usuario {
 	
 	private int id;
     private String email;
-    private String senhaHash;
-    private String tipoUsuario; // ENUM: PACIENTE, MEDICO, RECEPCIONISTA, ADMIN
+    private String senha;
+    private String tipoUsuario;
     private boolean ativo;
     private LocalDateTime dataCriacao;
 
-    public Usuario() {
-    }
+    public Usuario() {}
 
-    public Usuario(int id, String email, String senhaHash, String tipoUsuario, boolean ativo, LocalDateTime dataCriacao) {
+    public Usuario(int id, String email, String senha, String tipoUsuario, boolean ativo, LocalDateTime dataCriacao) {
         this.id = id;
         this.email = email;
-        this.senhaHash = senhaHash;
+        this.senha = senha;
         this.tipoUsuario = tipoUsuario;
         this.ativo = ativo;
         this.dataCriacao = dataCriacao;
@@ -32,8 +31,8 @@ public class Usuario {
         return email;
     }
 
-    public String getSenhaHash() {
-        return senhaHash;
+    public String getSenha() {
+        return senha;
     }
 
     public String getTipoUsuario() {
@@ -57,8 +56,8 @@ public class Usuario {
         this.email = email;
     }
 
-    public void setSenhaHash(String senhaHash) {
-        this.senhaHash = senhaHash;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public void setTipoUsuario(String tipoUsuario) {

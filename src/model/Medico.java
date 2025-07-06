@@ -1,43 +1,17 @@
 package model;
 
 public class Medico {
-	
-	private int id;
+    private int id;
     private int funcionarioId;
     private String crm;
 
-    public Medico() {
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public Medico(int id, int funcionarioId, String crm) {
-        this.id = id;
-        this.funcionarioId = funcionarioId;
-        this.crm = crm;
-    }
+    public int getFuncionarioId() { return funcionarioId; }
+    public void setFuncionarioId(int funcionarioId) { this.funcionarioId = funcionarioId; }
 
-    // Getters
-    public int getId() {
-        return id;
-    }
-
-    public int getFuncionarioId() {
-        return funcionarioId;
-    }
-
-    public String getCrm() {
-        return crm;
-    }
-
-    // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setFuncionarioId(int funcionarioId) {
-        this.funcionarioId = funcionarioId;
-    }
-
-    public void setCrm(String crm) {
-        this.crm = crm;
-    }
+    public String getCrm() { return crm; }
+    public void setCrm(String crm) { this.crm = crm; }
 }
