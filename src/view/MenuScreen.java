@@ -6,6 +6,8 @@ import model.Usuario;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -70,23 +72,58 @@ public class MenuScreen extends JFrame {
         buttonsPanel.add(Box.createVerticalGlue());
         return buttonsPanel;
     }
+    
+    private void abrirJanelaEAtualizar(JFrame janelaParaAbrir) {
+        janelaParaAbrir.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                carregarAgendamentos();
+            }
+        });
+        janelaParaAbrir.setVisible(true);
+    }
+
     private JButton createMenuButton(String text) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setMaximumSize(new Dimension(Integer.MAX_VALUE, button.getPreferredSize().height));
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        if ("Cadastrar Funcionário".equals(text)) button.addActionListener(e -> new CadastroFuncionarioScreen(usuarioLogado).setVisible(true));
-        else if ("Cadastrar Paciente".equals(text)) button.addActionListener(e -> new CadastroPacienteScreen(usuarioLogado).setVisible(true));
-        else if ("Cadastrar Prontuário".equals(text)) button.addActionListener(e -> new CadastroProntuarioScreen(usuarioLogado).setVisible(true));
-        else if ("Visualizar/Editar Pacientes".equals(text)) button.addActionListener(e -> new TabelaPacientesScreen(usuarioLogado).setVisible(true));
-        else if ("Visualizar/Editar Prontuários".equals(text)) button.addActionListener(e -> new TabelaProntuariosScreen(usuarioLogado).setVisible(true));
-        else if ("Visualizar/Editar Funcionários".equals(text)) button.addActionListener(e -> new TabelaFuncionariosScreen(usuarioLogado).setVisible(true));
-        else if ("Cadastrar Agendamento".equals(text)) button.addActionListener(e -> new CadastroAgendamentoScreen(usuarioLogado).setVisible(true));
-        else if ("Visualizar/Editar Agendamentos".equals(text)) button.addActionListener(e -> new TabelaAgendamentosScreen(usuarioLogado).setVisible(true));
-        else button.addActionListener(e -> JOptionPane.showMessageDialog(this, "Tela de '" + text + "' a ser implementada.", "Aviso", JOptionPane.INFORMATION_MESSAGE));
+        
+        button.addActionListener(e -> {
+            switch (text) {
+                case "Cadastrar Agendamento":
+                    abrirJanelaEAtualizar(new CadastroAgendamentoScreen(usuarioLogado));
+                    break;
+                case "Visualizar/Editar Agendamentos":
+                    abrirJanelaEAtualizar(new TabelaAgendamentosScreen(usuarioLogado));
+                    break;
+                case "Cadastrar Funcionário":
+                    abrirJanelaEAtualizar(new CadastroFuncionarioScreen(usuarioLogado));
+                    break;
+                case "Visualizar/Editar Funcionários":
+                    abrirJanelaEAtualizar(new TabelaFuncionariosScreen(usuarioLogado));
+                    break;
+                case "Cadastrar Paciente":
+                    abrirJanelaEAtualizar(new CadastroPacienteScreen(usuarioLogado));
+                    break;
+                case "Visualizar/Editar Pacientes":
+                    abrirJanelaEAtualizar(new TabelaPacientesScreen(usuarioLogado));
+                    break;
+                case "Cadastrar Prontuário":
+                    abrirJanelaEAtualizar(new CadastroProntuarioScreen(usuarioLogado));
+                    break;
+                case "Visualizar/Editar Prontuários":
+                    abrirJanelaEAtualizar(new TabelaProntuariosScreen(usuarioLogado));
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "Tela de '" + text + "' a ser implementada.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                    break;
+            }
+        });
         return button;
     }
-    private void carregarAgendamentos() {
+
+    public void carregarAgendamentos() {
         modeloTabela.setRowCount(0);
         AgendamentoDAO dao = new AgendamentoDAO();
         List<Agendamento> agendamentos = usuarioLogado.getFuncao().equalsIgnoreCase("MEDICO") ? dao.buscarPorMedicoUsuarioId(usuarioLogado.getId()) : dao.buscarTodos();

@@ -9,9 +9,7 @@ public class MainClass {
     	
         LoginScreen loginScreen = new LoginScreen();
     	loginScreen.setVisible(true);
-    	
-    	// CadastroMedico cadastroScreen = new CadastroMedico();
-    	// cadastroScreen.setVisible(true);
+ 
     }
 
 	public static void createMainScreen() {
