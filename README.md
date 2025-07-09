@@ -2,7 +2,10 @@ Para começar a utilizar o sistema é primeiro necessário realizar as configura
 
 Por padrão, as configurações atuais são:
 
+
+
 --MYSQLI--
+
 Servidor: localhost
 
 Porta: 3306
